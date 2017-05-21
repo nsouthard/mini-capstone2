@@ -1,0 +1,15 @@
+<h1>Rare Stamps of the World</h1>
+
+<div class="row">
+  <% @stamps.each do |stamp| %>
+    <div class="col-md-4">
+    <div class="thumbnail well">
+      <h2><a href="/stamps/<%= stamp.id %>"><%= stamp.name %></a></h2>
+      <h2>Price: <%= number_to_currency(stamp.price) %></h2>
+      <img src= <%= stamp.image %> alt="<%= stamp.name %>">
+      <h2><%= stamp.description %></h2>
+      <br>
+    </div>
+  </div>
+<% end %>
+</div>

@@ -1,0 +1,26 @@
+<div class="container">
+<div class="row">
+  <div class="col-md-12">
+  <div class="thumbnail well">
+
+    <h2><%= @stamp.name %></h2>
+    <h2>Year: <%= @stamp.year %></h2>
+    <h2>Price: <%= number_to_currency(@stamp.price) %></h2>
+    <h2>Taxes: <%= number_to_currency(@stamp.tax) %></h2>
+    <h2>Total: <%= number_to_currency(@stamp.total) %></h2>
+    <img src= <%= @stamp.image %>>
+    <h2><%= @stamp.description %></h2>
+
+  </div>
+  </div>
+</div>
+</div>
+
+  
+
+
+
+<div class="btn-group" role="group" aria-label="...">
+  <button type="button" class="btn btn-default"><a href="/stamps/<%= @stamp.id %>/edit">Edit</a></button>
+  <button type="button" class="btn btn-default"><%= link_to "Delete", "/stamps/#{@stamp.id}", method: :delete %></button>
+</div>

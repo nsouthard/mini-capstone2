@@ -1,0 +1,21 @@
+<h1>Edit Stamp Collection</h1>
+
+<%= form_tag "/stamps/#{@stamp.id}", method: :patch do %>
+  <div>
+    Stamp: <input type="text" name="name" value="<%= @stamp.name %>">
+  </div>
+  <div>
+    Year: <input type="text" name="year" value="<%= @stamp.year %>">
+  </div>
+ <div>
+    Price: <input type="text" name="price" value="<%= @stamp.price %>">
+  </div>
+   <div>
+    Image URL: <input type="text" name="image" value="<%= @stamp.image %>">
+  </div>
+   <div>
+    Description: <input type="text" name="description" value="<%= @stamp.description %>">
+  </div>
+  <input type="submit" value="Update Stamp Collection">
+
+<% end %>
