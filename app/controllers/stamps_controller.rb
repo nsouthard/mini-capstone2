@@ -61,7 +61,7 @@ class StampsController < ApplicationController
     redirect_to "/" #redirects to home page
   end
 
-  def random
+  def 
   end
 
 end

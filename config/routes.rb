@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   get '/stamps/:id/edit' => 'stamps#edit'
   patch '/stamps/:id' => 'stamps#update'
   delete '/stamps/:id' => 'stamps#destroy'
+
+  post '/orders' => 'orders#create'
+  get '/orders/:id' => 'orders#show'
 end
