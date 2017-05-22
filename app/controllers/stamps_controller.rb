@@ -13,6 +13,20 @@ class StampsController < ApplicationController
                                 "%#{search_term}%"
                                 )
     end
+
+    if sort_attribute && sort_order
+      @stamps = @stamps.order(sort_attribute => sort_order)
+    elsif sort_attribute
+      @stamps = @stamps.order(sort_attribute)
+    end
+        
+
+    if sort_attribute && sort_order
+      @products = @products.order(sort_attribute => sort_order)
+    elsif sort_attribute
+      @products = @products.order(sort_attribute)
+    end
+    
   end
 
   def new
@@ -61,7 +75,5 @@ class StampsController < ApplicationController
     redirect_to "/" #redirects to home page
   end
 
-  def 
-  end
 
 end
