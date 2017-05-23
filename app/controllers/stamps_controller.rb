@@ -5,6 +5,12 @@ class StampsController < ApplicationController
     sort_attribute = params[:sort]
     sort_order = params[:sort_order]
     search_term = params[:search_term]
+    category_search_term  = params[:category]
+
+    if category_search_term 
+      category = Category.find_by(name: category_search_term)
+      @stamps = category.stamps
+    end
 
     if search_term
       @stamps = @stamps.where(

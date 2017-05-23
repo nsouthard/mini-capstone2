@@ -1,14 +1,16 @@
 class OrdersController < ApplicationController
   
   def create
+    @stamp = Stamp.find(params[:stamp_id])
     order = Order.new(
                       quantity: params[:quantity],
-                      stamp_id: params[:stamp_id]
+                      user_id: current_user.id,
+                      stamp_id: params[:stamp_id],
+                      subtotal: @stamp.price,
+                      tax: @stamp.tax,
+                      total: @item.total
                       )
 
-    order.calculate_subtotal
-      order.calculate_tax
-      order.calculate_total
 
     order.save
     redirect_to "/orders/#{order.id}"

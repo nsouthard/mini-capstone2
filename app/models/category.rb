@@ -1,4 +1,4 @@
 class Category < ApplicationRecord
   has_many :category_stamp
-  has_many :products, through: :category_stamp
+  has_many :stamps, through: :category_stamp
 end
