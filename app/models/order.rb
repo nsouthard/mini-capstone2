@@ -1,6 +1,9 @@
 class Order < ApplicationRecord
-belongs_to :stamp, optional: true
 belongs_to :user
+has_many :carted_products
+has_many :stamp, through: :carted_products
+
+
 
   def calculate_subtotal
     self.subtotal = stamp.price * quantity
