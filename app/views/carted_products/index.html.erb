@@ -1,22 +1,20 @@
-<% @carted_product.each do |cart_prod| %>
-<h2><%= cart_prod.product.name %></h2>
-<h2><%= cart_prod.quantity %></h2>
-<h2><%= number_to_currency(carted_product.price) %></h2>
+<h1>Checkout Page</h1>
 
-
-
-<div class="row">
-  <% @stamps.each do |cart| %>
-    <div class="col-md-4">
-    <div class="thumbnail well">
-      <h2><a href="/carted_product/<%= carted_product.id %>"><%= carted_product.name %></a></h2>
-      <h2>Year: <%= carted_product.year %></h2>
-      <h2>Quantity: <%= carted_product.quantity %></h2>
-      <h2>Price: <%= number_to_currency(carted_product.price) %></h2>
-      <img src= <%= carted_product.image %> alt="<%= carted_product.name %>">
-      <h2><%= carted_product.description %></h2>
-      <br>
-    </div>
-  </div>
-<% end %>
+<div class="well"> 
+  <% @carted_product.each do |carted_product| %>
+    <h2><%= carted_product.stamp.name %></h2>
+    <h2><%= number_to_currency(carted_product.stamp.price) %></h2>
+    <h2><%= carted_product.quantity %></h2>
+    <%= link_to "remove", "/carted_products/#{carted_product.id}", method: :delete %>
+  <% end %>
 </div>
+
+
+<%= link_to "Buy Now", "/orders", method: :post, class: "btn btn-success" %>
+
+
+
+
+
+
+

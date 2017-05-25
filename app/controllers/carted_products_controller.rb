@@ -1,19 +1,32 @@
 class CartedProductsController < ApplicationController
 
-  def create
-    @stamp = Stamp.find(params[:stamp_id])
-    carted_product = Carted_Product.new(
-                      quantity: params[:quantity],
-                      user_id: current_user.id,
-                      stamp_id: params[:stamp_id],
-                      status: "carted",
-                      subtotal: @stamp.price,
-                      tax: @stamp.tax,
-                      total: @stamp.total
-                      )
-
-    carted_product.save
-    redirect_to "/cart"
+  def index
+    if current_user && current_user.cart.any?
+    # @carted_products = CartedProduct.all.where(user_id: current_user.id, status: "carted")
+    @carted_products = current_user.cart
+  else
+    flash[:warning] = "Why don't you add something to your cart"
+    redirect "/"
   end
 
+  def create
+    # @stamp = Stamp.find(params[:stamp_id])
+    carted_product = CartedProduct.new(
+                      user_id: current_user.id,
+                      quantity: params[:quantity],
+                      stamp_id: params[:stamp_id],
+                      status: "carted"
+                      )
+
+    carted_products.save
+    flash[:success] = "Item added to Cart"
+    redirect_to "/carted_products"
+  end
+
+  def destroy
+    carted_product = CartedProduct.find(params[:id])
+    carted_product.update(status: "removed")
+    flash[:success] = "Item Removed From Cart"
+    redirect_to "/carted_products"
+  end
 end
