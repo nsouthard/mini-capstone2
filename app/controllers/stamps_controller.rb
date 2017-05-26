@@ -1,6 +1,9 @@
 class StampsController < ApplicationController
+  before_action :authenticate_admin!, except: [:index, :show, :random]
+  # before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
+
     @stamps = Stamp.all
     sort_attribute = params[:sort]
     sort_order = params[:sort_order]
@@ -36,6 +39,7 @@ class StampsController < ApplicationController
   end
 
   def new
+    @product = Product.new
   end
 
   def create
@@ -46,9 +50,12 @@ class StampsController < ApplicationController
                           price: params[:price],
                           description: params[:description]
                           )
-    stamp.save
-    flash[:success] = "New Stamp Successfully Added"
-    redirect_to "/stamps/#{stamp.id}" #redirects to show action
+    if stamp.save
+      flash[:success] = "New Stamp Successfully Added"
+      redirect_to "/stamps/#{stamp.id}" #redirects to show action
+    else
+      render 'new.html.erb'
+    end
   end
 
   def show
@@ -69,9 +76,12 @@ class StampsController < ApplicationController
                               price: params[:price],
                               description: params[:description]
                               )
-    stamp.save
-    flash[:success] = "Stamp Collection Successfully Updated"
-    redirect_to "/stamps/#{stamp.id}" #redirects to show action
+    if stamp.save
+      flash[:success] = "Stamp Collection Successfully Updated"
+      redirect_to "/stamps/#{stamp.id}" #redirects to show action
+    else
+      render '/stamps/:id/edit'
+    end
   end
 
   def destroy
